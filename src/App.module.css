@@ -1,0 +1,390 @@
+:root {
+  --text: #51335d;
+  --surface: rgba(255, 255, 255, 0.78);
+  --surface-strong: rgba(255, 255, 255, 0.92);
+  --pink: #ff96c1;
+  --mint: #84e1d2;
+  --sky: #8fd7ff;
+  --lavender: #ceb9ff;
+}
+
+.app {
+  position: relative;
+  min-height: 100dvh;
+  padding: calc(14px + env(safe-area-inset-top)) 14px calc(24px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  font-family: "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 20% 14%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0) 40%),
+    linear-gradient(170deg, #ffddef 0%, #dff4ff 45%, #e8ffe4 100%);
+  overflow-x: hidden;
+}
+
+.bubbleA,
+.bubbleB {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(1px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bubbleA {
+  width: 200px;
+  height: 200px;
+  top: 30px;
+  right: -50px;
+  background: radial-gradient(circle, rgba(255, 205, 233, 0.8), rgba(255, 205, 233, 0));
+}
+
+.bubbleB {
+  width: 240px;
+  height: 240px;
+  left: -70px;
+  bottom: 140px;
+  background: radial-gradient(circle, rgba(170, 229, 255, 0.8), rgba(170, 229, 255, 0));
+}
+
+.header,
+.statsGrid,
+.playCard,
+.controlRow,
+.settingRow,
+.guideCard {
+  width: min(100%, 460px);
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  background: var(--surface);
+  border-radius: 20px;
+  padding: 14px 16px;
+  box-shadow: 0 12px 26px rgba(58, 47, 99, 0.14);
+}
+
+.logo {
+  margin: 0;
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  color: #f36eb0;
+}
+
+.header h1 {
+  margin: 4px 0 2px;
+  font-size: clamp(1.32rem, 5.4vw, 1.74rem);
+  line-height: 1.2;
+}
+
+.subline {
+  margin: 0;
+  color: #6b5580;
+  font-size: 0.9rem;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.statCard {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 9px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  box-shadow: 0 10px 20px rgba(52, 41, 94, 0.12);
+}
+
+.statCard span {
+  font-size: 0.74rem;
+  color: #6f6582;
+}
+
+.statCard strong {
+  font-size: 1.1rem;
+}
+
+.playCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  border-radius: 24px;
+  padding: 16px;
+  box-shadow: 0 16px 28px rgba(46, 39, 90, 0.16);
+}
+
+.previewDock {
+  width: 100%;
+  background: var(--surface-strong);
+  border-radius: 18px;
+  padding: 10px 12px 12px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.previewTitle {
+  margin: 0;
+  font-size: 0.76rem;
+  color: #7a688d;
+}
+
+.previewThumb {
+  grid-column: 1;
+  grid-row: 2;
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 8px 14px rgba(48, 43, 93, 0.18);
+}
+
+.previewName {
+  margin: 0;
+  font-size: 0.94rem;
+}
+
+.softButton {
+  min-height: 46px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 18px;
+  background: linear-gradient(135deg, #eef8ff, #fff);
+  color: #5b486d;
+  font-size: 0.9rem;
+  font-weight: 700;
+  box-shadow: 0 8px 14px rgba(58, 52, 96, 0.14);
+}
+
+.controlRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.primaryButton,
+.secondaryButton,
+.soundButton,
+.segmentButton,
+.segmentActive {
+  border: 0;
+  border-radius: 999px;
+  min-height: 54px;
+  font-size: 0.94rem;
+  font-weight: 700;
+  padding: 0 14px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.primaryButton {
+  background: linear-gradient(140deg, #ff8fbf, #ffb3d2);
+  color: #fff;
+  box-shadow: 0 10px 16px rgba(255, 102, 173, 0.3);
+}
+
+.secondaryButton {
+  background: linear-gradient(140deg, #ffffff, #f2fbff);
+  color: #5a486f;
+  box-shadow: 0 10px 16px rgba(47, 43, 88, 0.14);
+}
+
+.primaryButton:active,
+.secondaryButton:active,
+.soundButton:active,
+.segmentButton:active,
+.segmentActive:active,
+.softButton:active {
+  transform: translateY(1px) scale(0.99);
+  filter: brightness(0.98);
+}
+
+.settingRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.segment {
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 999px;
+  padding: 4px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  box-shadow: 0 10px 16px rgba(49, 42, 92, 0.12);
+}
+
+.segmentButton {
+  background: transparent;
+  color: #6c5f80;
+}
+
+.segmentActive {
+  background: linear-gradient(135deg, #9edbff, #bdeccf);
+  color: #3e3a59;
+  box-shadow: 0 8px 14px rgba(78, 153, 176, 0.28);
+}
+
+.soundButton {
+  min-width: 102px;
+  background: linear-gradient(135deg, #e8dcff, #fff);
+  color: #5a466f;
+  box-shadow: 0 10px 16px rgba(58, 42, 94, 0.14);
+}
+
+.guideCard {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(243, 251, 255, 0.95));
+  border-radius: 20px;
+  padding: 14px;
+  box-shadow: 0 12px 22px rgba(60, 44, 93, 0.16);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.guideCard h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.guideCard p {
+  margin: 0;
+  font-size: 0.93rem;
+}
+
+.clearLayer {
+  position: fixed;
+  inset: 0;
+  background: rgba(31, 28, 60, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 20;
+}
+
+.sparkleField {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.spark {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle at 40% 40%, #fff8ca, #ffc2e2);
+  clip-path: polygon(50% 0%, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0% 50%, 38% 38%);
+  animation: floatSpark 1.4s ease-in-out infinite;
+}
+
+.clearCard {
+  width: min(100%, 340px);
+  background: linear-gradient(165deg, #fff, #f5feff);
+  border-radius: 24px;
+  padding: 18px 16px;
+  text-align: center;
+  box-shadow: 0 18px 34px rgba(24, 20, 56, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.clearTop {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #f06ab0;
+}
+
+.clearCard h2 {
+  margin: 6px 0 10px;
+  font-size: 1.22rem;
+}
+
+.starLine {
+  margin: 0 0 12px;
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  color: #ffb243;
+}
+
+.clearActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.modalLayer {
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+  padding: 14px;
+  background: rgba(25, 23, 49, 0.46);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalCard {
+  width: min(100%, 380px);
+  background: linear-gradient(170deg, #ffffff, #f3fbff);
+  border-radius: 22px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 18px 30px rgba(24, 22, 55, 0.34);
+}
+
+.modalCard h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  text-align: center;
+}
+
+.modalImage {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 12px 20px rgba(48, 39, 92, 0.18);
+}
+
+@keyframes floatSpark {
+  0% {
+    transform: translateY(10px) scale(0.75);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-18px) scale(1);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .controlRow {
+    grid-template-columns: 1fr;
+  }
+
+  .settingRow {
+    grid-template-columns: 1fr;
+  }
+
+  .soundButton {
+    width: 100%;
+  }
+}
